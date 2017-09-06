@@ -8,14 +8,30 @@ A JavaScript library to convert Fountain.js formatted html back to fountain form
 
 Fountain.js currently lacks one thing: a way to convert its formatted html back to fountain. Until then, Reverse-Fountain.js provides this function.
 
-**NOTE**: This library isn't finished yet (as long as this NOTE exists).
+**NOTE**: This library isn't finished yet (as long as this line exists).
 
 ## Installation
 
 Copy and require `reverse-fountain.js` in your file. Put it on the same structure/folder as `fountain.js` for easy organization.
 
-To convert from `fountain.js` html to plain fountain string:
+To convert from `fountain.js` html to plain fountain text, see example below:
 
-```
-Code TBA
+```javasacript
+// Require both Fountain.js and Reverse-Fountain.js
+fountain = require('./fountain.js');
+reverseFountain = require('./reverse-fountain.js');
+
+// Get the original fountain text (by any means)
+var originalScreenplay = "INT. DRAGONSTONE (PORT) - DAY";
+
+// Fountain.js: Parse fountain to HTML
+fountain.parse(originalScreenplay.toString(), function(fountainJsResult) {
+
+  // Reverse-Fountain.js: Parse HTML to fountain
+  reverseFountain.parse(fountainJsResult.html.script, function(result) {
+    // This is the final fountain result
+    // "INT. DRAGONSTONE (PORT) - DAY"
+    console.log(result);
+  });
+});
 ```
