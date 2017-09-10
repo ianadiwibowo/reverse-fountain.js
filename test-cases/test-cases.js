@@ -14,9 +14,10 @@ const fs = require('fs');
 // 'testScreenplays' array and put the files on 'test-cases' folder.
 
 var testScreenplays = [];
-testScreenplays[0] = 'Big-Fish.fountain';
-testScreenplays[1] = 'Brick & Steel.fountain';
-testScreenplays[2] = 'The Last Birthday Card.fountain';
+testScreenplays[0] = 'Brick & Steel.fountain';
+// testScreenplays[0] = 'Big-Fish.fountain';
+// testScreenplays[1] = 'Brick & Steel.fountain';
+// testScreenplays[2] = 'The Last Birthday Card.fountain';
 // testScreenplays[3] = 'Add more fountain test script here, etc.';
 
 // Convert each fountain screenplays to HTML using fountain.js, and then
@@ -30,16 +31,19 @@ for (var i = 0; i < testScreenplays.length; i++) {
   // console.log('Fountain screenplay length: ' + originalScreenplay.length.toLocaleString() + ' chars'); // DEBUG
 
   // Fountain.js: Parse fountain to HTML
-  fountain.parse(originalScreenplay.toString(), function(fountainJsHtml) {
-    // console.log('Fountain.js HTML length: ' + fountainJsHtml.html.script.length.toLocaleString() + ' chars'); // DEBUG
+  fountain.parse(originalScreenplay.toString(), function(fountainJsResult) {
+    // console.log('Fountain.js HTML length: ' + fountainJsResult.html.script.length.toLocaleString() + ' chars'); // DEBUG
+
+    fs.writeFileSync(testScreenplays[i] + '.middle', fountainJsResult.html.script); // DEBUG
 
     // Reverse-Fountain.js: Parse HTML to fountain
-    reverseFountain.parse(fountainJsHtml.html.script, function(result) {
+    reverseFountain.parse(fountainJsResult.html.script, function(result) {
       if (result === originalScreenplay)
         console.log('Result: passed');
       else {
         console.log('Result: not passed');
       }
+      fs.writeFileSync(testScreenplays[i] + '.result', result); // DEBUG
     });
   });
 
