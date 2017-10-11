@@ -34,7 +34,13 @@ module.exports = {
     .replace(/<\/h2>/g, '\n\n')
 
     // Others
-    .replace(/<br \/>/g, '\n');
+    .replace(/<br \/>/g, '\n')
+
+    // Italic
+    .replace(/<span class="italic">(.*?)<\/span>/g, '*$1*')
+
+    // Underline
+    .replace(/<span class="underline">(.*?)<\/span>/g, '_$1_');
 
     callback(fountain); // DEBUG
   }
