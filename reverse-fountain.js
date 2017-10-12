@@ -7,19 +7,23 @@ module.exports = {
   parse: function(fountainJsHtml, callback) {
 
     // Scene Heading
-    var fountain = fountainJsHtml.replace(/<h3>/g, '')
-    .replace(/<\/h3>/g, '\n\n')
+    var fountain = fountainJsHtml.replace(/<h3>(.*?)<\/h3>/g, '.$1\n\n')
+    .replace(/\.INT\. /g, 'INT. ')
+    .replace(/\.EXT\. /g, 'EXT. ')
+    /// `.I/E ` rules here
 
     // Character
-    .replace(/<h4>/g, '')
-    .replace(/<\/h4>/g, '\n')
+    .replace(/<h4>(.*?)<\/h4>/g, '$1\n')
 
     // Parentheses
     .replace(/<p class="parenthetical">(.*?)<\/p>/g, '$1\n')
 
+    // Centered
+    .replace(/<p class="centered">(.*?)<\/p>/g, '> $1 <\n')
+
     // Action (& Dialog)
-    .replace(/<p>/g, '')
-    .replace(/<\/p>/g, '\n\n')
+    .replace(/<\/p>\n<p>/g, '</p><p>')
+    .replace(/<p>(.*?)<\/p>/g, '$1\n\n')
 
     // Dialog
     .replace(/<div class="dialogue">/g, '')
@@ -30,10 +34,9 @@ module.exports = {
     .replace(/<div class="dialogue right">(.*?)\n/g, '$1 ^\n')
 
     // Transition
-    .replace(/<h2>/g, '')
-    .replace(/<\/h2>/g, '\n\n')
+    .replace(/<h2>(.*?)<\/h2>/g, '$1\n\n')
 
-    // Others
+    // Simple newline
     .replace(/<br \/>/g, '\n')
 
     // Italic
