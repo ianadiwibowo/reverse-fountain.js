@@ -8,16 +8,12 @@ module.exports = {
 
     // Scene Heading
     var fountain = fountainJsHtml.replace(/<h3>(.*?)<\/h3>/g, '.$1\n\n')
-    .replace(/\.INT\. /g, 'INT. ') // Standard heading
-    .replace(/\.EXT\. /g, 'EXT. ') // Standard heading
-    .replace(/\.INT\.\/EXT\. /g, 'INT./EXT. ') // Standard heading
-    .replace(/\.INT\/EXT\. /g, 'INT/EXT. ') // Standard heading
-    .replace(/\.EXT\.\/INT\. /g, 'EXT./INT. ') // Standard heading
-    .replace(/\.EXT\/INT\. /g, 'EXT/INT. ') // Standard heading
-    .replace(/\.I\/E\. /g, 'I/E. ') // Standard heading
-    .replace(/\.E\/I\. /g, 'E/I. ') // Standard heading
-    .replace(/\.I\/E /g, 'I/E ') // Standard heading
-    .replace(/\.E\/I /g, 'E/I ') // Standard heading
+    .replace(/\.INT/gi, 'INT') // These are standard headings
+    .replace(/\.EXT/gi, 'EXT')
+    .replace(/\.EST/gi, 'EST')
+    .replace(/\.INT\.\/EXT/gi, 'INT./EXT')
+    .replace(/\.INT\/EXT/gi, 'INT/EXT')
+    .replace(/\.I\/E/gi, 'I/E')
 
     // Character
     .replace(/<h4>(.*?)<\/h4>/g, '$1\n')
@@ -42,8 +38,8 @@ module.exports = {
 
     // Transition
     .replace(/<h2>(.*?)<\/h2>/g, '> $1\n\n')
-    .replace(/> CUT TO:/g, 'CUT TO:') // Standard transition
-    .replace(/> SMASH CUT TO:/g, 'SMASH CUT TO:') // Standard transition
+    .replace(/> CUT TO:/g, 'CUT TO:') // These are standard transitions
+    .replace(/> SMASH CUT TO:/g, 'SMASH CUT TO:')
 
     // Simple newline
     .replace(/<br \/>/g, '\n')
