@@ -4,6 +4,7 @@
 // https://github.com/ianadiwibowo/reverse-fountain.js
 
 module.exports = {
+  // TODO: For now we support only the script body, need to support the header/title also
   parse: function(fountainJsHtml, callback) {
 
     // Scene Heading
@@ -21,7 +22,7 @@ module.exports = {
     // Parentheses
     .replace(/<p class="parenthetical">(.*?)<\/p>/g, '$1\n')
 
-    // Centered
+    // Centered text
     .replace(/<p class="centered">(.*?)<\/p>/g, '> $1 <\n')
 
     // Action (& Dialog)
@@ -38,14 +39,21 @@ module.exports = {
 
     // Transition
     .replace(/<h2>(.*?)<\/h2>/g, '> $1\n\n')
-    .replace(/> CUT TO:/g, 'CUT TO:') // These are standard transitions
-    .replace(/> SMASH CUT TO:/g, 'SMASH CUT TO:')
+    .replace(/> CUT TO/g, 'CUT TO') // These are standard transitions
+    .replace(/> SMASH CUT TO/g, 'SMASH CUT TO')
 
     // Simple newline
     .replace(/<br \/>/g, '\n')
 
-    // Italic
+    // Italics
     .replace(/<span class="italic">(.*?)<\/span>/g, '*$1*')
+
+    // Bold
+    // TODO: Put bold rule here
+    .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
+
+    // Bold italics
+    // TODO: Need bold italics rule?
 
     // Underline
     .replace(/<span class="underline">(.*?)<\/span>/g, '_$1_');
